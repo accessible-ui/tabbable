@@ -1,0 +1,65 @@
+{
+  "name": "@accessible/tabbable",
+  "version": "1.0.0",
+  "homepage": "https://github.com/accessible-ui/accessible#readme",
+  "repository": "github:accessible-ui/accessible",
+  "bugs": "https://github.com/accessible-ui/accessible/issues",
+  "author": "Jared Lunde <jared@BeStellar.co> (https://jaredLunde.com)",
+  "license": "MIT",
+  "description": "Returns an array of all tabbable DOM nodes within a containing node.",
+  "keywords": [
+    "tabbable"
+  ],
+  "main": "dist/cjs/index.js",
+  "module": "dist/es/index.js",
+  "files": [
+    "/dist"
+  ],
+  "sideEffects": false,
+  "scripts": {
+    "build": "npm run build:cjs && npm run build:es && npm run build:types",
+    "build:cjs": "babel src -d dist/cjs -x .ts --ignore \"**/*.test.ts\",\"**/test.ts\" --delete-dir-on-start",
+    "build:es": "babel src -d dist/es -x .ts --env-name es --ignore \"**/*.test.ts\",\"**/test.ts\" --delete-dir-on-start",
+    "build:types": "tsc -p tsconfig.json -d --outDir dist/es --emitDeclarationOnly && mkdir -p dist/cjs && cp -R dist/es/**.d.ts dist/cjs && rimraf dist/**/*.test.d.ts",
+    "check-types": "tsc --noEmit -p tsconfig.json",
+    "format": "prettier --write \"**/*.{ts,js,md,yml,json,babelrc,eslintrc,prettierrc}\"",
+    "lint": "eslint . --ext .ts",
+    "prepublishOnly": "npm run lint && npm run test && npm run build && npm run format",
+    "test": "jest",
+    "validate": "npm run check-types && npm run lint && npm run test -- --coverage"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged && npm run build:types"
+    }
+  },
+  "lint-staged": {
+    "**/*.{ts,js}": [
+      "eslint",
+      "prettier --write"
+    ],
+    "**/*.{md,yml,json}": [
+      "prettier --write"
+    ]
+  },
+  "devDependencies": {
+    "@lunde/create-pkg": "^1.0.84",
+    "@lunde/babel-preset-es": "latest",
+    "jest": "latest",
+    "cross-env": "latest",
+    "eslint": "latest",
+    "eslint-import-resolver-jest": "latest",
+    "eslint-plugin-jest": "latest",
+    "husky": "latest",
+    "lint-staged": "latest",
+    "prettier": "latest",
+    "rimraf": "^2.6.3",
+    "@types/jest": "latest",
+    "@typescript-eslint/eslint-plugin": "latest",
+    "@typescript-eslint/parser": "latest",
+    "ts-jest": "latest",
+    "typescript": "latest"
+  },
+  "dependencies": {},
+  "peerDependencies": {}
+}
