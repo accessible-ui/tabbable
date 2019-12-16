@@ -19,7 +19,7 @@ const matches =
       Element.prototype.msMatchesSelector ||
       Element.prototype.webkitMatchesSelector
 
-const tabbable = (el: HTMLElement, includeRootNode: boolean) => {
+const tabbable = (el: HTMLElement, includeRootNode = false) => {
   const regularTabbables: HTMLElement[] = []
   const orderedTabbables: Tabbables[] = []
 
