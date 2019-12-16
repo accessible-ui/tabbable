@@ -1,10 +1,10 @@
 {
   "name": "@accessible/tabbable",
-  "version": "1.0.0",
-  "homepage": "https://github.com/accessible-ui/accessible#readme",
-  "repository": "github:accessible-ui/accessible",
-  "bugs": "https://github.com/accessible-ui/accessible/issues",
-  "author": "Jared Lunde <jared@BeStellar.co> (https://jaredLunde.com)",
+  "version": "1.0.1",
+  "homepage": "https://github.com/accessible-ui/tabbable#readme",
+  "repository": "github:accessible-ui/tabbable",
+  "bugs": "https://github.com/accessible-ui/tabbable/issues",
+  "author": "Jared Lunde <jared.lunde@gmail.com> (https://jaredLunde.com)",
   "license": "MIT",
   "description": "Returns an array of all tabbable DOM nodes within a containing node.",
   "keywords": [

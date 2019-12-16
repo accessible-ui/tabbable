@@ -10,12 +10,12 @@
     <img alt="Bundlephobia" src="https://img.shields.io/bundlephobia/minzip/@accessible/tabbable?style=for-the-badge&labelColor=24292e">
   </a>
   <!--
-  <a aria-label="Code coverage report" href="https://codecov.io/gh/accessible-ui/accessible">
-    <img alt="Code coverage" src="https://img.shields.io/codecov/c/gh/accessible-ui/accessible?style=for-the-badge&labelColor=24292e">
+  <a aria-label="Code coverage report" href="https://codecov.io/gh/accessible-ui/tabbable">
+    <img alt="Code coverage" src="https://img.shields.io/codecov/c/gh/accessible-ui/tabbable?style=for-the-badge&labelColor=24292e">
   </a>
   -->
-  <a aria-label="Build status" href="https://travis-ci.org/accessible-ui/accessible">
-    <img alt="Build status" src="https://img.shields.io/travis/accessible-ui/accessible?style=for-the-badge&labelColor=24292e">
+  <a aria-label="Build status" href="https://travis-ci.org/accessible-ui/tabbable">
+    <img alt="Build status" src="https://img.shields.io/travis/accessible-ui/tabbable?style=for-the-badge&labelColor=24292e">
   </a>
   <a aria-label="NPM version" href="https://www.npmjs.com/package/@accessible/tabbable">
     <img alt="NPM Version" src="https://img.shields.io/npm/v/@accessible/tabbable?style=for-the-badge&labelColor=24292e">
@@ -71,7 +71,7 @@ Summary of ordering principles:
 
 ## Why fork?
 
-The creator is looking for a new maintainer and `@accessibility` packages don't need some of the features
+The creator is looking for a new maintainer and `@accessibile` packages don't need some of the features
 in the original, so I can make a smaller package with TypeScript types by forking :P
 
 ## Credit
