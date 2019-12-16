@@ -8,7 +8,10 @@
   "license": "MIT",
   "description": "Returns an array of all tabbable DOM nodes within a containing node.",
   "keywords": [
-    "tabbable"
+    "tabbable",
+    "aria",
+    "a11y",
+    "focus management"
   ],
   "main": "dist/cjs/index.js",
   "module": "dist/es/index.js",
@@ -25,7 +28,7 @@
     "format": "prettier --write \"**/*.{ts,js,md,yml,json,babelrc,eslintrc,prettierrc}\"",
     "lint": "eslint . --ext .ts",
     "prepublishOnly": "npm run lint && npm run test && npm run build && npm run format",
-    "test": "jest",
+    "test": "jest --runInBand",
     "validate": "npm run check-types && npm run lint && npm run test -- --coverage"
   },
   "husky": {

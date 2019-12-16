@@ -1,5 +1,3 @@
-const hello = world => `hello ${world}`
-
-test('passes', () => {
-  expect(hello('world')).toMatchSnapshot()
+it('passes', () => {
+  expect(1).toBe(1)
 })
