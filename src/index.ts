@@ -8,7 +8,7 @@ const candidateSelector =
 export interface Tabbables {
   documentOrder: number
   tabIndex: number
-  node: Element
+  node: HTMLElement | HTMLInputElement
 }
 
 const matches =
