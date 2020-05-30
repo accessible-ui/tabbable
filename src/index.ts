@@ -11,15 +11,15 @@ export interface Tabbables {
   node: HTMLElement | HTMLInputElement
 }
 
-const matches =
+const matches: Element['matches'] =
   typeof Element === 'undefined'
-    ? () => {}
+    ? () => false
     : Element.prototype.matches ||
       // @ts-ignore
       Element.prototype.msMatchesSelector ||
       Element.prototype.webkitMatchesSelector
 
-const tabbable = (el: HTMLElement, includeRootNode = false) => {
+const tabbable = (el: HTMLElement, includeRootNode = false): HTMLElement[] => {
   const regularTabbables: HTMLElement[] = []
   const orderedTabbables: Tabbables[] = []
 
@@ -35,10 +35,9 @@ const tabbable = (el: HTMLElement, includeRootNode = false) => {
   let i, candidate, candidateTabindex
   for (i = 0; i < candidates.length; i++) {
     candidate = candidates[i]
-
     if (!isNodeMatchingSelectorTabbable(candidate)) continue
-
     candidateTabindex = getTabindex(candidate)
+
     if (candidateTabindex === 0) {
       regularTabbables.push(candidate)
     } else {
@@ -52,14 +51,16 @@ const tabbable = (el: HTMLElement, includeRootNode = false) => {
 
   return orderedTabbables
     .sort(sortOrderedTabbables)
-    .map(a => a.node)
+    .map((a) => a.node)
     .concat(regularTabbables)
 }
 
-const isNodeMatchingSelectorTabbable = node =>
+const isNodeMatchingSelectorTabbable = (node: HTMLElement) =>
   !(
     !isNodeMatchingSelectorFocusable(node) ||
-    (isInput(node) && node.type === 'radio' && !isTabbableRadio(node)) ||
+    (node.tagName === 'INPUT' &&
+      (node as HTMLInputElement).type === 'radio' &&
+      !isTabbableRadio(node as HTMLInputElement)) ||
     getTabindex(node) < 0
   )
 
