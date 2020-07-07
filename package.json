@@ -6,7 +6,7 @@
   "bugs": "https://github.com/accessible-ui/tabbable/issues",
   "author": "Jared Lunde <jared.lunde@gmail.com> (https://jaredLunde.com)",
   "license": "MIT",
-  "description": "Returns an array of all tabbable DOM nodes within a containing node.",
+  "description": "A function that returns an array of all tabbable DOM nodes within a containing node.",
   "keywords": [
     "tabbable",
     "aria",
@@ -15,18 +15,15 @@
   ],
   "main": "dist/main/index.js",
   "module": "dist/module/index.js",
+  "unpkg": "dist/umd/tabbable.js",
   "source": "src/index.ts",
   "types": "types/index.d.ts",
-  "files": [
-    "/dist",
-    "/src",
-    "/types"
-  ],
   "exports": {
     ".": {
       "browser": "./dist/module/index.js",
       "import": "./dist/esm/index.mjs",
       "require": "./dist/main/index.js",
+      "umd": "./dist/umd/tabbable.js",
       "source": "./src/index.ts",
       "types": "./types/index.d.ts",
       "default": "./dist/main/index.js"
@@ -34,24 +31,28 @@
     "./package.json": "./package.json",
     "./": "./"
   },
+  "files": [
+    "/dist",
+    "/src",
+    "/types"
+  ],
   "sideEffects": false,
   "scripts": {
-    "build": "npm run build-esm && npm run build-main && npm run build-module && npm run build-types",
-    "build-esm": "npm run compile -- -d dist/esm --env-name esm --out-file-extension .mjs",
-    "build-main": "npm run compile -- -d dist/main --env-name main",
-    "build-module": "npm run compile -- -d dist/module --env-name module",
-    "build-types": "tsc -p tsconfig.json -d --outDir types --emitDeclarationOnly",
-    "check-types": "tsc --noEmit -p tsconfig.json",
-    "compile": "babel src -x .ts --ignore \"**/*.test.ts\" --delete-dir-on-start",
-    "format": "prettier --write \"**/*.{ts,js,md,yml,json,eslintrc,prettierrc}\"",
+    "build": "lundle build",
+    "check-types": "lundle check-types",
+    "dev": "lundle build -f module,cjs -w",
+    "format": "prettier --write \"{,!(node_modules|dist|coverage)/**/}*.{ts,js,md,yml,json}\"",
     "lint": "eslint . --ext .ts",
-    "prepublishOnly": "npm run lint && npm run test && npm run build && npm run format",
+    "prepublishOnly": "cli-confirm \"Did you run 'yarn release' first? (y/N)\"",
+    "prerelease": "npm run validate && npm run build",
+    "release": "git add . && standard-version -a",
     "test": "jest",
-    "validate": "npm run check-types && npm run lint && npm run test -- --coverage"
+    "validate": "lundle check-types && npm run lint && jest --coverage"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run build-types && git add types && lint-staged"
+      "pre-commit": "lundle check-types && lint-staged",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
     }
   },
   "lint-staged": {
@@ -63,20 +64,69 @@
       "prettier --write"
     ]
   },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "eslintConfig": {
+    "extends": [
+      "lunde"
+    ]
+  },
+  "eslintIgnore": [
+    "node_modules",
+    "coverage",
+    "dist",
+    "/types",
+    "test",
+    "*.config.js"
+  ],
+  "jest": {
+    "moduleDirectories": [
+      "node_modules",
+      "src",
+      "test"
+    ],
+    "testMatch": [
+      "<rootDir>/src/**/?(*.)test.ts"
+    ],
+    "collectCoverageFrom": [
+      "**/src/**/*.ts"
+    ],
+    "setupFilesAfterEnv": [
+      "./test/setup.js"
+    ],
+    "snapshotResolver": "./test/resolve-snapshot.js",
+    "globals": {
+      "__DEV__": true
+    }
+  },
+  "prettier": {
+    "semi": false,
+    "singleQuote": true,
+    "bracketSpacing": false
+  },
   "devDependencies": {
-    "@lunde/babel-preset-es": "latest",
+    "@commitlint/cli": "latest",
+    "@commitlint/config-conventional": "latest",
     "@types/jest": "latest",
-    "@typescript-eslint/eslint-plugin": "latest",
-    "@typescript-eslint/parser": "latest",
-    "babel-plugin-annotate-pure-calls": "latest",
+    "babel-jest": "latest",
+    "cli-confirm": "latest",
+    "cz-conventional-changelog": "latest",
     "eslint": "latest",
-    "eslint-import-resolver-jest": "latest",
-    "eslint-plugin-jest": "latest",
+    "eslint-config-lunde": "latest",
     "husky": "latest",
     "jest": "latest",
     "lint-staged": "latest",
+    "lundle": "latest",
     "prettier": "latest",
-    "ts-jest": "latest",
+    "standard-version": "latest",
     "typescript": "latest"
   },
   "dependencies": {},
