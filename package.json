@@ -1,6 +1,6 @@
 {
   "name": "@accessible/tabbable",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "homepage": "https://github.com/accessible-ui/tabbable#readme",
   "repository": "github:accessible-ui/tabbable",
   "bugs": "https://github.com/accessible-ui/tabbable/issues",
@@ -38,7 +38,7 @@
   ],
   "sideEffects": false,
   "scripts": {
-    "build": "lundle build",
+    "build": "lundle build --umd-case camel",
     "check-types": "lundle check-types",
     "dev": "lundle build -f module,cjs -w",
     "format": "prettier --write \"{,!(node_modules|dist|coverage)/**/}*.{ts,js,md,yml,json}\"",
